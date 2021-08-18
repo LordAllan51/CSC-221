@@ -4,6 +4,7 @@ M1LAB1 - Double a Number
 Lord Jenar Adolph C Allan
 8/18/2021
 """
+results = []
 
 def main():
     """Main Loop of program."""
@@ -12,15 +13,20 @@ def main():
     #TODP This should loop
     keepgoing = 0
     val = 0
+    
     while keepgoing == 0:
         collectNums()
         keepgoing = rep(val)
+    print("Bye!")
+    print(results)
     
 def collectNums():
     num = int(input("Enter a number: "))
     dbl = doubleAnumber(num)
+    print()
     print("A doubled ",num,"is:",dbl)
-
+    results.append(dbl)
+    
 
 def doubleAnumber(num):
     """input : one number
@@ -31,7 +37,6 @@ def doubleAnumber(num):
 
 def rep(val):
     while val == 0:
-        collectNums()
         print("1. Enter another number")
         print("2. Exit")
         select = int(input("Enter your choice: "))
