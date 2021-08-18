@@ -18,13 +18,23 @@ def main():
         collectNums()
         keepgoing = rep(val)
     print("Bye!")
-    print(results)
+    print()
+    itera = len(results)
+    itera = int(itera / 2)
+    
+    index1 = 0
+    index2 = 1
+    for x in range(itera):
+        print(f'Number {results[index1]}. is doubled to {results[index2]}.')
+        index1+=2
+        index2+=2
     
 def collectNums():
     num = int(input("Enter a number: "))
     dbl = doubleAnumber(num)
     print()
     print("A doubled ",num,"is:",dbl)
+    results.append(num)
     results.append(dbl)
     
 
