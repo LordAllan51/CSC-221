@@ -114,13 +114,6 @@ class Game:
             newRoom = self.rooms[newRoomName]
             self.here = newRoom
             self.here.describe()
-        #Helper functions - not necessary but useful
-        @property
-        def here(self):
-            return self.player.loc
-        @here.setter
-        def here(self, room):
-            self.player.loc = room
             
     def commandGet(self, itemName):
         """ remove the item from the room (if its there)
@@ -131,14 +124,14 @@ class Game:
         #rpp, and then add it to the inventory.
         print("You try to get the", itemName)
         #Broken code until container is fixed. (SEE CONTAINER)
-        '''
+        
         if self.here.contains(itemName):
             item = self.here.contents[itemName]
             self.here.moveItemTo(item, self.player)
             print("You try to get the", itemName)
         else:
-            print("You try to get the", itemName)
-        '''
+            print("You can't see any", itemName, "here.")
+        
     def commandDrop(self, item):
         """ remove the item from the player 
         (if its there) and place it in the room
@@ -147,7 +140,22 @@ class Game:
         #We'll need to remove the item from the current
         #rpp, and then add it to the inventory.
         print("You try to drop the", item)
+        
+        if self.player.contains(itemName):
+            item = self.player.contents[itemName]
+            self.player.moveItemTo(item, self.here)
+            print("You drop the", itemName,".")
+        else:
+            print("You don't have a", itemName, "to drop!")
     
+    #Helper functions - not necessary but useful
+    @property
+    def here(self):
+        return self.player.loc
+    @here.setter
+    def here(self, room):
+        self.player.loc = room
+        
 def main():
     game = Game()
     game.setup()
