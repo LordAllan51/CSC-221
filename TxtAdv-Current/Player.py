@@ -8,6 +8,7 @@ class Player(Container):
     """
     def __init__(self):
         self.loc = None #what room is the player in
-        self.contents = {} #Container
+        self.contents = {} # because we're also a container
+        
         
         
