@@ -1,4 +1,5 @@
 from Container import Container
+from Item import Item
 
 class Player(Container):
     """
@@ -8,7 +9,13 @@ class Player(Container):
     """
     def __init__(self):
         self.loc = None #what room is the player in
+        self.hp = 100
+        self.currency = 50
+        self.victory = False
+        
         self.contents = {} # because we're also a container
-        
-        
-        
+    
+    def is_alive(self):
+        return self.hp > 0
+    
+    

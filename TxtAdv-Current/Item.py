@@ -1,7 +1,5 @@
-# Item class
-# We'll put all our basic subclasses here
 
-class BaseItem:
+class Item:
     """
     Items are found in rooms, or in the player inventory.
     (Possibly we'll change that to being found in Container objects?)
@@ -35,7 +33,7 @@ class BaseItem:
             desc += " It's too heavy to lift."
         return desc
                  
-                 
+    
     @property 
     def canGet(self):
         """ True / False -- item can be picked up. """
@@ -45,19 +43,17 @@ class BaseItem:
     def canGet(self, setting):
         """ True / False - item can be picked up. """
         self._canGet = setting
- 
-        
-class Item (BaseItem):
+
+class BaseItem(Item):
      """
      This inherits from BaseItem. 
      We'll discuss how init(), etc. work as we go.
      """
      def __init__(self, name, description):
-         # "super" runs the equiv function from the base class
-         super().__init__(name, description) 
-         
-
-class UsableItem (Item):
+        # "super" runs the equiv function from the base class
+        super().__init__(name, description) 
+        
+class UsableItem(BaseItem):
     """
     Works like a regular item, except that
     it has one or more usable verbs
@@ -103,23 +99,30 @@ class UsableItem (Item):
         else:
             desc += " It's pretty rusty."
         return desc
-    
+
+class PuzzleItem(BaseItem):
+    def __init__(self, name, description):
+        super().__init__(name, description)
+        
+
 #test code
 def main():
-    key = Item("key", "It's a bit rusty.")
+    key = PuzzleItem("key", "It's a bit rusty.")
     
-    sword = Item("sword", "A katana.")
+    sword = UsableItem("sword", "just a long sword.")
     
-    bed = Item("bed", "A fluffy bed.")
+    bed = BaseItem("bed", "A fluffy bed.")
     bed.canGet = False
     
     stuff = [key,sword, bed]
     for item in stuff:
         print(item.name, "-", item.description)
-        
+    print()
     sword.use()
     for item in stuff:
         print(item.name, "-", item.description)
+    
+    
     
 if __name__ == "__main__":
     main()

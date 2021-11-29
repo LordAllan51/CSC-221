@@ -8,16 +8,21 @@ class Container:
         self.contents = {}
         
     def add(self, item):
-        self.contents[item.name] = item
+         self.contents[item.name] = item
     def remove(self, item):
-        if self.contains(item):
-            # self.contents.remove(item)
-            # remove the item from the dictionary
-            del self.contents[item.name]
-            # print(self.contents)
+        #print("@@@ removing", item, "from", self)# debug code
+        """Function glitch ITEM DUPE
+        ### Contains code is BUGGED and Broke everything
+        # if self.contains(item):
+        """
+        if self.contents[item.name]:#Works better than the
+            del self.contents[item.name]#contains function
+            #print(self.contents)# debug code
+        
+    #Broken code
     def moveItemTo(self, item, destination):
         #t TODO: confirm destination is a CONTAINER!
-        print("moveItemTo: ", item.name, "from", self, "to", destination)
+        #print("@@ moving", item, "from", self, "to", destination)#debug code
         destination.add(item)
         self.remove(item)
         
@@ -29,19 +34,13 @@ class Container:
             text += self.contents[key].description
             text += "\n"
         return text
-        
-    """Function glitch ITEM DUPE"""
-    def contains(self, itemName):
-        """quick way to check if item is present. """
-        # keys() gives us a list of names of items present
-        itemNameList = list(self.contents.keys())
-        print("Content of :",itemNameList,"object", self)
-        if itemName in itemNameList:
-            return True
-        return False
     
-def main():
-    """ test code"""    
-
-if __name__ == "__main__":
-    main()
+    """THE SOURCE OF BREAK-AGE"""
+    # def (self, itemName):
+    #     """quick way to check if item is present. """
+    #     # keys() gives us a list of names of items present
+    #     itemNameList = list(self.contents.keys())
+    #     #print("Content of :",itemNameList,"object", self)
+    #     if itemName in itemNameList:
+    #         return True
+    #     return False
